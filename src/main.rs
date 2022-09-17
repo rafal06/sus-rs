@@ -1,6 +1,7 @@
 #[macro_use] extern crate rocket;
 use serde::{Serialize, Deserialize};
 use rocket::serde::json::Json;
+use rocket_dyn_templates::{Template, context};
 
 mod shortener;
 use crate::shortener::gen_id;
@@ -11,8 +12,8 @@ struct Url {
 }
 
 #[get("/")]
-fn index() -> &'static str {
-    "Hello, world!"
+fn index() -> Template {
+    Template::render("index", context! {})
 }
 
 #[post("/", data="<l_url>")]
@@ -29,4 +30,5 @@ fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index])
         .mount("/", routes![form_handler])
+        .attach(Template::fairing())
 }

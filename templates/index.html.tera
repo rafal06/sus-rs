@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUS - Selfhosted URL Shortener</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+    <script defer>
+        async function shorten() {
+            event.preventDefault();
+
+            const urlBox = document.querySelector('#url-box');
+
+            const response = fetch('.', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    url: urlBox.value
+                }),
+            });
+
+            const responseObj = (await response).json();
+
+            const shortBox = document.querySelector('#short-box');
+            shortBox.innerHTML = window.location.href + (await responseObj).url;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <input  id="url-box" type="text">
+        <button id="btn-shorten" onclick="shorten()">Shorten</button>
+    </form>
+    <p id="short-box"></p>
+</body>
+</html>
