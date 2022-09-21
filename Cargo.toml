@@ -9,6 +9,7 @@ edition = "2021"
 serde = "1.0.144"
 serde_derive = "1.0.144"
 md-5 = "0.10.4"
+dotenv = "0.15.0"
 
 [dependencies.rocket]
 version = "0.5.0-rc.2"
@@ -17,3 +18,11 @@ features = ["json"]
 [dependencies.rocket_dyn_templates]
 version = "0.1.0-rc.2"
 features = ["tera"]
+
+[dependencies.sqlx]
+version = "0.6"
+features = ["runtime-tokio-rustls", "postgres"]
+
+[dependencies.tokio]
+version = "1.21.1"
+features = ["full"]
