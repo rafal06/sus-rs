@@ -1,4 +1,5 @@
 #[macro_use] extern crate rocket;
+use rocket::response::Redirect;
 use serde::{Serialize, Deserialize};
 use rocket::serde::json::Json;
 use rocket_dyn_templates::{Template, context};
@@ -7,7 +8,7 @@ mod shortener;
 use crate::shortener::gen_id;
 
 mod database;
-use crate::database::save_to_db;
+use crate::database::{save_to_db, get_url_by_id};
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Url {
@@ -30,10 +31,19 @@ async fn form_handler(l_url: Json<Url>) -> Json<Url> {
     })
 }
 
+#[get("/<id>")]
+async fn short_url(id: String) -> Option<Redirect> {
+    match get_url_by_id(&id).await {
+        Ok(url) => Some(Redirect::permanent(url)),
+        Err(_) => None,
+    }
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![index])
         .mount("/", routes![form_handler])
+        .mount("/", routes![short_url])
         .attach(Template::fairing())
 }
