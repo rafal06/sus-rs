@@ -1,4 +1,5 @@
 #[macro_use] extern crate rocket;
+use rocket::fs::FileServer;
 use rocket::response::Redirect;
 use serde::{Serialize, Deserialize};
 use rocket::serde::json::Json;
@@ -45,5 +46,6 @@ fn rocket() -> _ {
         .mount("/", routes![index])
         .mount("/", routes![form_handler])
         .mount("/", routes![short_url])
+        .mount("/public", FileServer::from("public"))
         .attach(Template::fairing())
 }

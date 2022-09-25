@@ -5,12 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUS - Selfhosted URL Shortener</title>
-    <style>
-        body {
-            font-family: sans-serif;
-        }
-    </style>
-    <script defer>
+    <link rel="stylesheet" href="./public/styles.css">
+    <link rel="stylesheet" href="./public/tooltips.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+</head>
+<body>
+    <form class="shadow input-box">
+        <input  id="url-box" class="hover-shadow" type="text" placeholder="Paste the URL...">
+        <button id="btn-shorten" class="hover-shadow" onclick="shorten()">➞</button>
+    </form>
+
+    <div class="shadow output-box">
+        <div>
+            <p id="short-box"></p>
+            <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#short-box">
+        </div>
+    </div>
+
+    <script>
+        new ClipboardJS('.copy-btn');
+
         async function shorten() {
             event.preventDefault();
 
@@ -31,14 +45,8 @@
 
             const shortBox = document.querySelector('#short-box');
             shortBox.innerHTML = window.location.href + (await responseObj).url;
+            document.querySelector('.output-box').style.transform = 'scale(100%)';
         }
     </script>
-</head>
-<body>
-    <form>
-        <input  id="url-box" type="text">
-        <button id="btn-shorten" onclick="shorten()">Shorten</button>
-    </form>
-    <p id="short-box"></p>
 </body>
 </html>

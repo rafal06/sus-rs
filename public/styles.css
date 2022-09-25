@@ -1,0 +1,127 @@
+:root {
+    --bg-light: #E9E9E9;
+    --bg-dark: #1F1F1F;
+    --shadow-light: ;
+    --shadow-dark: ;
+    --text-light: initial;
+    --text-dark: darkgray;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    margin:           0;
+    height:           100vh;
+    font-family:      sans-serif;
+    display:          flex;
+    flex-direction:   column;
+    justify-content:  center;
+    align-items:      center;
+}
+
+input {
+    width: 20rem;
+}
+
+button {
+    cursor: pointer;
+}
+
+.shadow {
+    background-color:  var(--bg-light);
+    transition-duration: 200ms;
+    padding:       5px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow:
+        10px 10px 7px #BBBBBB,
+        -10px -10px 7px aliceblue,
+        inset 5px 5px 3px aliceblue,
+        inset -5px -5px 3px #BBBBBB;
+}
+
+.input-box * {
+    padding: 15px;
+    border:  none;
+    border-radius:    10px;
+    background-color: transparent;
+    transition: background-color 200ms;
+}
+
+/* .input-box *:hover {
+    background-color: #00000023;
+} */
+
+/* .output-box:has(p:empty) {
+    display: none;
+} */
+
+.output-box {
+    transform:  scale(0%);
+    transition: transform ease 200ms;
+    width:      20rem;
+}
+
+.output-box p {
+    margin: 0;
+}
+
+.output-box img {
+    cursor: pointer;
+}
+
+.output-box > div {
+    margin:  16px;
+    display: flex;
+    justify-content: space-between;
+    align-items:     center;
+}
+
+.short-box::after {
+    content: url('./copy.svg');
+    /* display: inline; */
+}
+
+.hover-shadow {
+    will-change: filter;
+    transition:  filter ease-out 200ms;
+}
+
+.hover-shadow:hover {
+    filter: drop-shadow(0 0 .3rem #202020);
+}
+
+@media (prefers-color-scheme: dark) {
+    * {
+        color: var(--text-dark);
+    }
+
+    body {
+        background-color: var(--bg-dark);
+    }
+
+    .shadow {
+        background-color: var(--bg-dark);
+        box-shadow:
+            10px 10px 7px #121212,
+            -10px -10px 7px #262626,
+            inset 5px 5px 3px #262626,
+            inset -5px -5px 3px #121212;
+    }
+
+    .hover-shadow:hover {
+        filter: drop-shadow(0 0 .3rem #E9E9E9);
+    }
+
+    .output-box img {
+        filter: invert();
+    }
+
+    .output-box img:hover {
+        filter: invert() drop-shadow(0 0 .3rem #E9E9E9);
+    }
+}
