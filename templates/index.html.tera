@@ -20,6 +20,10 @@
     <script>
         new ClipboardJS('.copy-btn');
 
+        if(Storage.urls == undefined) {
+            Storage.urls = new Array();
+        }
+
         async function shorten() {
             event.preventDefault();
 
@@ -51,6 +55,9 @@
                 </div>
             `;
 
+            //Storage.urls = new Array(5);
+            Storage.urls.push(urlID);
+            console.log(Storage.urls);
 
             outputBox.style.transform = 'scale(100%)';
         }
