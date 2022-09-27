@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SUS - Selfhosted URL Shortener</title>
     <link rel="stylesheet" href="./public/styles.css">
-    <link rel="stylesheet" href="./public/tooltips.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
+    <script src="https://rawcdn.githack.com/mathiasbynens/CSS.escape/4b25c283eaf4dd443f44a7096463e973d56dd1b2/css.escape.js?min=1"></script>
 </head>
 <body>
     <form class="shadow input-box">
@@ -15,12 +15,7 @@
         <button id="btn-shorten" class="hover-shadow" onclick="shorten()">➞</button>
     </form>
 
-    <div class="shadow output-box">
-        <div>
-            <p id="short-box"></p>
-            <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#short-box">
-        </div>
-    </div>
+    <div class="shadow output-box"></div>
 
     <script>
         new ClipboardJS('.copy-btn');
@@ -28,6 +23,7 @@
         async function shorten() {
             event.preventDefault();
 
+            const outputBox = document.querySelector('.output-box');
             const urlBox = document.querySelector('#url-box');
 
             const response = fetch('.', {
@@ -43,9 +39,20 @@
 
             const responseObj = (await response).json();
 
-            const shortBox = document.querySelector('#short-box');
-            shortBox.innerHTML = window.location.href + (await responseObj).url;
-            document.querySelector('.output-box').style.transform = 'scale(100%)';
+            if (outputBox.style.transform !== '') {
+                outputBox.appendChild(document.createElement('hr'));
+            }
+
+            const urlID = (await responseObj).url;
+            outputBox.innerHTML += `
+                <div>
+                    <p id="${CSS.escape(urlID)}">${window.location.href + urlID}</p>
+                    <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#${CSS.escape(urlID)}">
+                </div>
+            `;
+
+
+            outputBox.style.transform = 'scale(100%)';
         }
     </script>
 </body>

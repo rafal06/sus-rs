@@ -31,6 +31,10 @@ button {
     cursor: pointer;
 }
 
+hr {
+    border-color: lightgray;
+}
+
 .shadow {
     background-color:  var(--bg-light);
     transition-duration: 200ms;
@@ -102,6 +106,10 @@ button {
 
     body {
         background-color: var(--bg-dark);
+    }
+
+    hr {
+        border-color: #464646;
     }
 
     .shadow {
