@@ -20,15 +20,23 @@
     <script>
         new ClipboardJS('.copy-btn');
 
-        if(Storage.urls == undefined) {
-            Storage.urls = new Array();
+        const outputBox = document.querySelector('.output-box');
+        const urlBox = document.querySelector('#url-box');
+
+        console.log(localStorage.urls)
+        if(localStorage.urls == 'undefined' || localStorage.urls == undefined) {
+            localStorage.urls = '';
+        } else {
+            let urlArr = localStorage.urls.split(',');
+            urlArr.shift();
+
+            for(let id of urlArr) {
+                showUrl(id);
+            }
         }
 
         async function shorten() {
             event.preventDefault();
-
-            const outputBox = document.querySelector('.output-box');
-            const urlBox = document.querySelector('#url-box');
 
             const response = fetch('.', {
                 method: 'POST',
@@ -42,22 +50,23 @@
             });
 
             const responseObj = (await response).json();
+            const urlID = (await responseObj).url;
+            showUrl(urlID);
 
+            localStorage.urls += ',' + urlID;
+        }
+
+        function showUrl(id) {
             if (outputBox.style.transform !== '') {
                 outputBox.appendChild(document.createElement('hr'));
             }
 
-            const urlID = (await responseObj).url;
             outputBox.innerHTML += `
-                <div>
-                    <p id="${CSS.escape(urlID)}">${window.location.href + urlID}</p>
-                    <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#${CSS.escape(urlID)}">
-                </div>
+            <div>
+                <p id="${CSS.escape(id)}">${window.location.href + id}</p>
+                <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#${CSS.escape(id)}">
+            </div>
             `;
-
-            //Storage.urls = new Array(5);
-            Storage.urls.push(urlID);
-            console.log(Storage.urls);
 
             outputBox.style.transform = 'scale(100%)';
         }
