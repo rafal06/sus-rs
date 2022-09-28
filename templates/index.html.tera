@@ -7,7 +7,6 @@
     <title>SUS - Selfhosted URL Shortener</title>
     <link rel="stylesheet" href="./public/styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
-    <script src="https://rawcdn.githack.com/mathiasbynens/CSS.escape/4b25c283eaf4dd443f44a7096463e973d56dd1b2/css.escape.js?min=1"></script>
 </head>
 <body>
     <form class="shadow input-box">
@@ -63,8 +62,8 @@
 
             outputBox.innerHTML += `
             <div>
-                <p id="${CSS.escape(id)}">${window.location.href + id}</p>
-                <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#${CSS.escape(id)}">
+                <p id="_${id}">${window.location.href + id}</p>
+                <img src="./public/copy.svg" alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#_${id}">
             </div>
             `;
 
