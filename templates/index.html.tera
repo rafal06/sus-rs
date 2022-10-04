@@ -17,21 +17,34 @@
     <div class="shadow output-box"></div>
 
     <script>
+        // Used for saving to localStorage
+        class UrlObj {
+            constructor(id) {
+                this.id  = id;
+            }
+
+            saveToLS() {
+                const urlArr = JSON.parse(localStorage.urls);
+                urlArr.push(this);
+                localStorage.urls = JSON.stringify(urlArr);
+            }
+        }
+
         new ClipboardJS('.copy-btn');
 
         const outputBox = document.querySelector('.output-box');
         const urlBox = document.querySelector('#url-box');
 
         console.log(localStorage.urls)
-        if(localStorage.urls == 'undefined' || localStorage.urls == undefined) {
-            localStorage.urls = '';
-        } else {
-            let urlArr = localStorage.urls.split(',');
-            urlArr.shift();
+        try {
+            const urlArr = JSON.parse(localStorage.urls);
 
-            for(let id of urlArr) {
-                showUrl(id);
+            for(let url of urlArr) {
+                showUrl(url.id);
             }
+        } catch(err) {
+            console.log(err);
+            localStorage.urls = JSON.stringify([]);
         }
 
         async function shorten() {
@@ -52,7 +65,8 @@
             const urlID = (await responseObj).url;
             showUrl(urlID);
 
-            localStorage.urls += ',' + urlID;
+            const urlObj = new UrlObj(urlID);
+            urlObj.saveToLS();
         }
 
         function showUrl(id) {
