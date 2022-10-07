@@ -33,6 +33,8 @@
             arr.unshift(urlObj);
             return arr;
         });
+
+        urlBoxValue = '';
     }
 </script>
 
