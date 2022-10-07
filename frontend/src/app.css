@@ -60,10 +60,6 @@ hr {
     transition: background-color 200ms;
 }
 
-/* .input-box *:hover {
-    background-color: #00000023;
-} */
-
 .output-box {
     transform:  scale(0%);
     transition: transform ease 200ms;
@@ -103,16 +99,20 @@ hr {
     filter: drop-shadow(0 0 .3rem #202020);
 }
 
+.input-box input:focus {
+    filter: none;
+}
+
 @media (prefers-color-scheme: dark) {
     * {
-        color: var(--text-dark);
-    }
+    color: var(--text-dark);
+}
 
-    body {
-        background-color: var(--bg-dark);
-    }
+body {
+    background-color: var(--bg-dark);
+}
 
-    hr {
+hr {
         border-color: #464646;
     }
 
