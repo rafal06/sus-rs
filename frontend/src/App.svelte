@@ -9,8 +9,6 @@
     let urlBoxValue = '';
 
     async function shorten() {
-        event.preventDefault(); // Prevent refreshing the page
-
         const response = fetch('.', {
             method: 'POST',
             headers: {
@@ -40,7 +38,7 @@
 
 <form class="shadow input-box">
     <input  id="url-box" class="hover-shadow" type="text" placeholder="Paste the URL..." bind:value={urlBoxValue}>
-    <button id="btn-shorten" class="hover-shadow" on:click={shorten}>➞</button>
+    <button id="btn-shorten" class="hover-shadow" on:click|preventDefault={shorten}>➞</button>
 </form>
 
 <div class="shadow output-box" class:output-shown={$urlArr.length !== 0}>
