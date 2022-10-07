@@ -1,2 +1,5 @@
 /target
 .env
+
+# Some MacOS file
+.DS_Store

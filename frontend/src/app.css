@@ -17,6 +17,10 @@ body {
     margin:           0;
     height:           100vh;
     font-family:      sans-serif;
+}
+
+#app {
+    height:           100vh;
     display:          flex;
     flex-direction:   column;
     justify-content:  center;
@@ -60,14 +64,14 @@ hr {
     background-color: #00000023;
 } */
 
-/* .output-box:has(p:empty) {
-    display: none;
-} */
-
 .output-box {
     transform:  scale(0%);
     transition: transform ease 200ms;
     width:      20rem;
+}
+
+.output-shown {
+    transform: scale(100%);
 }
 
 .output-box p {

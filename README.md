@@ -16,7 +16,15 @@ cargo install sqlx-cli
 sqlx migrate run
 ```
 
-5. Run this command to compile and run the program:
+5. Build the frontend
+```sh
+cd frontend
+npm install
+npm run build
+cd ..
+```
+
+6. Compile and run the program
 ```sh
 cargo run
 ```
