@@ -44,10 +44,12 @@
 </form>
 
 <div class="shadow output-box" class:output-shown={$urlArr.length !== 0}>
-    {#each $urlArr as urlObj}
-        <div>
-            <p id="_{urlObj.id}">{window.location.href + urlObj.id}</p>
-            <img src={copyIcon} alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#_{urlObj.id}">
-        </div>
-    {/each}
+    <div>
+        {#each $urlArr as urlObj}
+            <div class="output-box-text-div">
+                <p id="_{urlObj.id}">{window.location.href + urlObj.id}</p>
+                <img src={copyIcon} alt="copy" class="hover-shadow copy-btn" data-clipboard-target="#_{urlObj.id}">
+            </div>
+        {/each}
+    </div>
 </div>

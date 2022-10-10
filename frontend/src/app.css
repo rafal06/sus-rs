@@ -64,6 +64,12 @@ hr {
     transform:  scale(0%);
     transition: transform ease 200ms;
     width:      20rem;
+    padding-bottom: 6rem;
+}
+
+.output-box > div {
+    overflow-y: scroll;
+    max-height: 80vh;
 }
 
 .output-shown {
@@ -78,7 +84,7 @@ hr {
     cursor: pointer;
 }
 
-.output-box > div {
+.output-box-text-div{
     margin:  16px;
     display: flex;
     justify-content: space-between;
