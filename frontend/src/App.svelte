@@ -9,6 +9,10 @@
     let urlBoxValue = '';
 
     async function shorten() {
+        if(urlBoxValue === '') {
+            return;
+        }
+
         const response = fetch('.', {
             method: 'POST',
             headers: {
