@@ -1,5 +1,6 @@
 #[macro_use] extern crate rocket;
 use rocket::fs::{FileServer, NamedFile, relative};
+use rocket::http::Status;
 use rocket::response::Redirect;
 use serde::{Serialize, Deserialize};
 use rocket::serde::json::Json;
@@ -23,14 +24,18 @@ async fn index() -> Option<NamedFile> {
 }
 
 #[post("/", data="<l_url>")]
-async fn form_handler(l_url: Json<Url>) -> Json<Url> {
+async fn form_handler(l_url: Json<Url>) -> Result<Json<Url>, Status> {
     println!("{:?}", l_url.url);
     let id = gen_id();
-    save_to_db(&id, &l_url.url).await.unwrap();
 
-    Json( Url {
+    if let Err(msg) = save_to_db(&id, &l_url.url).await {
+        eprintln!("Database Error: {:?}", msg);
+        return Err(Status::InternalServerError);
+    }
+
+    Ok(Json( Url {
         url: id,
-    })
+    }))
 }
 
 #[get("/<id>")]
