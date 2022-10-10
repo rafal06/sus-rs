@@ -64,7 +64,7 @@ hr {
     transform:  scale(0%);
     transition: transform ease 200ms;
     width:      20rem;
-    padding-bottom: 6rem;
+    padding-bottom: 6px;
 }
 
 .output-box > div {
