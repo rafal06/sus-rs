@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ClipboardJS from 'clipboard'
+    import ClipboardJS from 'clipboard';
 
     import type { Url } from './lib/store';
     import { urlArr } from './lib/store';
