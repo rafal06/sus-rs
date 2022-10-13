@@ -15,3 +15,7 @@ export let urlArr = writable<Array<Url>>(lsData || []);
 urlArr.subscribe(value => {
     localStorage.urls = JSON.stringify(value);
 })
+
+// ---
+// Store for storing the expandness of full URLs
+export let expandedUrls = writable<Object>({});

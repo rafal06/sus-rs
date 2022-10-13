@@ -70,22 +70,55 @@ hr {
 .output-box > div {
     overflow-y: scroll;
     max-height: 80vh;
+/*    padding: 16px;*/
+    padding: 16px 0;
 }
+
+.output-box > div > div {
+    margin-bottom:  16px;
+    padding: 0 16px 16px 16px;
+    border-bottom: 2px solid #5d5d5d;
+}
+
+.output-box > div > div:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding: 0 16px;
+}
+
+/* .output-box > div::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent
+} */
 
 .output-shown {
     transform: scale(100%);
 }
 
-.output-box p {
+.output-box-text-div p {
     margin: 0;
 }
 
-.output-box img {
+.full-url-p {
+    margin: 16px 0 0 0;
+    overflow-y: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.icons {
+    display: flex;
+}
+
+.icons img {
     cursor: pointer;
 }
 
-.output-box-text-div{
-    margin:  16px;
+.copy-btn {
+    margin-right: 10px;
+}
+
+.output-box-text-div {
     display: flex;
     justify-content: space-between;
     align-items:     center;
