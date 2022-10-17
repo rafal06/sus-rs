@@ -124,11 +124,6 @@ hr {
     align-items:     center;
 }
 
-.short-box::after {
-    content: url('./copy.svg');
-    /* display: inline; */
-}
-
 .hover-shadow {
     will-change: filter;
     transition:  filter ease-out 200ms;
