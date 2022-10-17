@@ -118,6 +118,10 @@ hr {
     margin-right: 10px;
 }
 
+.expand-btn-collapsed {
+    transform: rotate(0.5turn);
+}
+
 .output-box-text-div {
     display: flex;
     justify-content: space-between;
